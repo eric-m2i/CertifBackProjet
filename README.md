@@ -45,8 +45,6 @@ Nous sommes ouverts aux contributions ! Si vous souhaitez ajouter des fonctionna
 
 ## Auteurs
 
-## Auteurs
-
 - Mat [GitHub/matstrza](https://github.com/matstrza/)
 - Vincent [GitHub/vincentdevweb](https://github.com/vincentdevweb/)
 - Eric [GitHub/eric-m2i](https://github.com/eric-m2i/)
