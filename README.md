@@ -13,7 +13,7 @@ Bienvenue dans le projet de chat en ligne basé sur Spring. Cette application de
 
 ## Fonctionnalités
 
-# Canaux
+### Canaux
 
 - **Création de Canal :** Les utilisateurs peuvent créer de nouveaux canaux pour organiser les discussions.
 - **Suppression de Canal :** Les utilisateurs peuvent supprimer des canaux existants.
@@ -21,7 +21,7 @@ Bienvenue dans le projet de chat en ligne basé sur Spring. Cette application de
 - **Liste des Messages :** Affichage de tous les messages dans un canal spécifique.
 - **Renommage de Canal :** Les utilisateurs peuvent renommer les canaux existants.
 
-# Messages
+### Messages
 
 - **Ajout de Message :** Les utilisateurs peuvent envoyer des messages dans les canaux.
 
