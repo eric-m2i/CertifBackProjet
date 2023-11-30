@@ -1,0 +1,74 @@
+@startuml
+
+package "DAO" {
+    class Channel {
+        <<Entity>>
+        +id: Long <<PK>>
+        name: String
+        messages: List<Message>
+
+        +getId(): Long
+        +setId(id: Long): void
+        +getName(): String
+        +setName(name: String): void
+        +getMessages(): List<Message>
+        +setMessages(messages: List<Message>): void
+        +addMessage(message: Message): void
+        +removeMessage(message: Message): void
+    }
+
+    class Message {
+        <<Entity>>
+        +id: Long <<PK>>
+        content: String
+        timestamp: java.time.LocalDateTime
+        channel: Channel <<FK>>
+
+        +getId(): Long
+        +setId(id: Long): void
+        +getContent(): String
+        +setContent(content: String): void
+        +getTimestamp(): java.time.LocalDateTime
+        +setTimestamp(timestamp: java.time.LocalDateTime): void
+        +getChannel(): Channel
+        +setChannel(channel: Channel): void
+    }
+
+    Channel --* Message : Has
+}
+
+package "Service" {
+    class ChatService {
+        <<Service>>
+        channelRepository: ChannelRepository
+        messageRepository: MessageRepository
+
+        +getAllChannels(): List<Channel>
+        +getChannelById(channelId: Long): Channel
+        +createChannel(channelName: String): Channel
+        +deleteChannel(channelId: Long): void
+        +getMessagesByChannel(channelId: Long): List<Message>
+        +addMessage(channelId: Long, content: String): Message
+    }
+}
+
+package "DAO" {
+    interface ChannelRepository {
+        <<Repository>>
+        +findAll(): List<Channel>
+        +findById(id: Long): Optional<Channel>
+        +save(channel: Channel): Channel
+        +deleteById(id: Long): void
+    }
+
+    interface MessageRepository {
+        <<Repository>>
+        +findByChannelId(channelId: Long): List<Message>
+        +save(message: Message): Message
+    }
+}
+
+ChatService --> ChannelRepository
+ChatService --> MessageRepository
+
+@enduml
