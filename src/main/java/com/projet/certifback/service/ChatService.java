@@ -38,7 +38,7 @@ public class ChatService {
 
     public Channel updateChannel(Channel updateChannel, Long channelId) {
         Channel existingChannel = getChannelById(channelId);
-        if (existingChannel != null && existingChannel.getName() != "GENERAL") {
+        if (existingChannel != null && existingChannel.getName().equals("GENERAL")) {
             updateChannel.setId(existingChannel.getId());
             return updateChannel;
         }
@@ -49,7 +49,7 @@ public class ChatService {
         Channel existingChannel = getChannelById(id);
 
         if (existingChannel != null) {
-            if (channelPatch.getName() != null && existingChannel.getName() != "GENERAL") {
+            if (channelPatch.getName() != null && !existingChannel.getName().equals("GENERAL")) {
                 existingChannel.setName(channelPatch.getName());
             }
             if (channelPatch.getDescription() != null) {
@@ -64,7 +64,7 @@ public class ChatService {
 
     public Boolean deleteChannel(Long channelId) {
         Channel channelRecup = getChannelById(channelId);
-        if (channelRecup != null && channelRecup.getName() != "GENERAL") {
+        if (channelRecup != null && !channelRecup.getName().equals("GENERAL")) {
             channelRepository.deleteById(channelId);
             return true;
         }
@@ -91,14 +91,29 @@ public class ChatService {
         return messageRepository.findByUserId(channelId);
     }
 
-    public Message addMessage(Long channelId, String content) {
+    public Message getMessageById(Long messageId) {
+        return messageRepository.findById(messageId).orElse(null);
+    }
+
+    public Boolean deleteMessage(Long messageId) {
+        Message messageRecup = getMessageById(messageId);
+        if (messageRecup != null) {
+            messageRepository.deleteById(messageId);
+            return true;
+        }
+        return false;
+    }
+
+    public Message addMessage(Long channelId,Long userId, String content) {
         Channel channel = channelRepository.findById(channelId).orElse(null);
+        User User = userRepository.findById(userId).orElse(null);
 
         if (channel != null) {
             Message message = new Message();
             message.setContent(content);
             message.setTimestamp(LocalDateTime.now());
             message.setChannel(channel);
+            message.setUser(User);
 
             return messageRepository.save(message);
         }

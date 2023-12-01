@@ -23,8 +23,6 @@ import com.projet.certifback.controller.Channel.Dto.ChannelPostDTO;
 import com.projet.certifback.dao.Channel.Channel;
 import com.projet.certifback.service.ChatService;
 
-import jakarta.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("/api/channels")
 public class ChannelRestController {

@@ -2,23 +2,23 @@ package com.projet.certifback.controller.Message.Dto;
 
 import java.time.LocalDateTime;
 
-import com.projet.certifback.controller.Channel.Dto.ChannelPostDTO;
-import com.projet.certifback.controller.User.Dto.UserPostDTO;
+import com.projet.certifback.dao.Channel.Channel;
+import com.projet.certifback.dao.User.User;
 import java.util.Objects;
 
 
-public class MessageDTO {
+public class MessagePostDTO {
 
     private String content;
     private LocalDateTime timestamp;
-    private ChannelPostDTO channel;
-    private UserPostDTO user;
+    private Channel channel;
+    private User user;
 
 
-    public MessageDTO() {
+    public MessagePostDTO() {
     }
 
-    public MessageDTO(String content, LocalDateTime timestamp, ChannelPostDTO channel, UserPostDTO user) {
+    public MessagePostDTO(String content, LocalDateTime timestamp, Channel channel, User user) {
         this.content = content;
         this.timestamp = timestamp;
         this.channel = channel;
@@ -41,38 +41,38 @@ public class MessageDTO {
         this.timestamp = timestamp;
     }
 
-    public ChannelPostDTO getChannel() {
+    public Channel getChannel() {
         return this.channel;
     }
 
-    public void setChannel(ChannelPostDTO channel) {
+    public void setChannel(Channel channel) {
         this.channel = channel;
     }
 
-    public UserPostDTO getUser() {
+    public User getUser() {
         return this.user;
     }
 
-    public void setUser(UserPostDTO user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public MessageDTO content(String content) {
+    public MessagePostDTO content(String content) {
         setContent(content);
         return this;
     }
 
-    public MessageDTO timestamp(LocalDateTime timestamp) {
+    public MessagePostDTO timestamp(LocalDateTime timestamp) {
         setTimestamp(timestamp);
         return this;
     }
 
-    public MessageDTO channel(ChannelPostDTO channel) {
+    public MessagePostDTO channel(Channel channel) {
         setChannel(channel);
         return this;
     }
 
-    public MessageDTO user(UserPostDTO user) {
+    public MessagePostDTO user(User user) {
         setUser(user);
         return this;
     }
@@ -81,11 +81,11 @@ public class MessageDTO {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof MessageDTO)) {
+        if (!(o instanceof MessagePostDTO)) {
             return false;
         }
-        MessageDTO messageDTO = (MessageDTO) o;
-        return Objects.equals(content, messageDTO.content) && Objects.equals(timestamp, messageDTO.timestamp) && Objects.equals(channel, messageDTO.channel) && Objects.equals(user, messageDTO.user);
+        MessagePostDTO messagePostDTO = (MessagePostDTO) o;
+        return Objects.equals(content, messagePostDTO.content) && Objects.equals(timestamp, messagePostDTO.timestamp) && Objects.equals(channel, messagePostDTO.channel) && Objects.equals(user, messagePostDTO.user);
     }
 
     @Override
@@ -103,5 +103,5 @@ public class MessageDTO {
             "}";
     }
     
-
+    
 }
