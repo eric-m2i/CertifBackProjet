@@ -1,0 +1,27 @@
+DROP TABLE IF EXIST Users;
+DROP TABLE IF EXIST Channels;
+DROP TABLE IF EXIST Messages;
+
+CREATE TABLE Users (
+    id BIGSERIAL PRIMARY KEY,
+    nom VARCHAR(30)NOT NULL,
+    prenom VARCHAR(30)NOT NULL,
+    email VARCHAR(100)NOT NULL UNIQUE,
+    pseudo VARCHAR(100)NOT NULL UNIQUE
+);
+
+CREATE TABLE Channels (
+    id BIGSERIAL PRIMARY KEY,
+    nom_canal VARCHAR(100)NOT NULL UNIQUE,
+    description VARCHAR(255)
+);
+
+CREATE TABLE Messages (
+    id BIGSERIAL PRIMARY KEY,
+    Contenu_message TEXT NOT NULL,
+    Date_heure TIMESTAMP NOT NULL,
+    user_id BIGINT NOT NULL,
+    canal_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (canal_id) REFERENCES Channels(id)
+);

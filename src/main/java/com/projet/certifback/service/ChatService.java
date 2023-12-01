@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projet.certifback.dao.Channel;
-import com.projet.certifback.dao.ChannelRepository;
-import com.projet.certifback.dao.Message;
-import com.projet.certifback.dao.MessageRepository;
+import com.projet.certifback.dao.Channel.Channel;
+import com.projet.certifback.dao.Channel.ChannelRepository;
+import com.projet.certifback.dao.Message.Message;
+import com.projet.certifback.dao.Message.MessageRepository;
+import com.projet.certifback.dao.User.User;
+import com.projet.certifback.dao.User.UserRepository;
 
 @Service
 public class ChatService {
@@ -19,6 +21,9 @@ public class ChatService {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public List<Channel> getAllChannels() {
         return channelRepository.findAll();
     }
@@ -27,18 +32,63 @@ public class ChatService {
         return channelRepository.findById(channelId).orElse(null);
     }
 
-    public Channel createChannel(String channelName) {
-        Channel channel = new Channel();
-        channel.setName(channelName);
-        return channelRepository.save(channel);
+    public Channel saveChannel(Channel newChannel) {
+        return channelRepository.save(newChannel);
     }
 
-    public void deleteChannel(Long channelId) {
-        channelRepository.deleteById(channelId);
+    public Channel updateChannel(Channel updateChannel, Long channelId) {
+        Channel existingChannel = getChannelById(channelId);
+        if (existingChannel != null && existingChannel.getName() != "GENERAL") {
+            updateChannel.setId(existingChannel.getId());
+            return updateChannel;
+        }
+        return null;
+    }
+
+    public Channel patchChannel(Channel channelPatch, Long id) {
+        Channel existingChannel = getChannelById(id);
+
+        if (existingChannel != null) {
+            if (channelPatch.getName() != null && existingChannel.getName() != "GENERAL") {
+                existingChannel.setName(channelPatch.getName());
+            }
+            if (channelPatch.getDescription() != null) {
+                existingChannel.setDescription(channelPatch.getDescription());
+            }
+
+            return existingChannel;
+        }
+
+        return null;
+    }
+
+    public Boolean deleteChannel(Long channelId) {
+        Channel channelRecup = getChannelById(channelId);
+        if (channelRecup != null && channelRecup.getName() != "GENERAL") {
+            channelRepository.deleteById(channelId);
+            return true;
+        }
+        return false;
+    }
+
+    public User saveUser(User newUser) {
+        return userRepository.save(newUser);
+    }
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public List<Message> getMessagesByChannel(Long channelId) {
         return messageRepository.findByChannelId(channelId);
+    }
+
+    public List<Message> getMessagesByUser(Long channelId) {
+        return messageRepository.findByUserId(channelId);
     }
 
     public Message addMessage(Long channelId, String content) {

@@ -78,7 +78,7 @@ Le projet est organisé en packages de la manière suivante :
 GET /api/channels
 ```
 
-#### 2. Récupérer la liste de tous les canaux
+#### 2. Poster un nouveau Canal
 
 ```http
 POST /api/channels
