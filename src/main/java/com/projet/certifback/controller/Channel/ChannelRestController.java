@@ -70,8 +70,8 @@ public class ChannelRestController {
         }
     }
 
-    @PutMapping("/{channelId}")
-    public ResponseEntity<String> putChannel(@RequestBody ChannelPostDTO channelPutDTO, @PathParam("channelId") Long channelId) {
+    @PutMapping("{channelId}")
+    public ResponseEntity<String> putChannel(@RequestBody ChannelPostDTO channelPutDTO, @PathVariable("channelId") Long channelId) {
         Channel channel = ChannelMapper.convertFromDtoToEntity(channelPutDTO);
         Channel existingChanel = chatService.updateChannel(channel, channelId);
         if (existingChanel != null) {
@@ -94,7 +94,7 @@ public class ChannelRestController {
                 .body("Chanel Not Found");
     }
 
-    @PatchMapping("clients/{id}")
+    @PatchMapping("{id}")
     public ResponseEntity<String> patchChannel(@PathVariable("id") Long id,
     @RequestBody ChannelPostDTO ChannelPatchDTO) {
     Channel Channel = ChannelMapper.convertFromDtoToEntity(ChannelPatchDTO);
@@ -111,11 +111,11 @@ public class ChannelRestController {
     }
     }
 
-    @DeleteMapping("/{channelId}")
-    public ResponseEntity<String> deleteChannel(@PathParam("channelId") Long channelId) {
+    @DeleteMapping("{channelId}")
+    public ResponseEntity<String> deleteChannel(@PathVariable("channelId") Long channelId) {
         if (chatService.deleteChannel(channelId)) {
-            return ResponseEntity.ok("Client deleted successfully");
+            return ResponseEntity.ok("Channel deleted successfully");
         } else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Channel not found");
     }
 }
