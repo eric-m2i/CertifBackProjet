@@ -22,7 +22,7 @@ public class ChannelMapper {
         List<Message> messages = new ArrayList<>();
         for (Message message : entity.getMessages()) {
             message.setChannel(null);
-            message.setChannel(null);
+            message.setUser(null);
             messages.add(message);
         }
         dto.setMessages(messages);
