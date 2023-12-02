@@ -1,4 +1,4 @@
-package com.projet.certifback.dao.Message;
+package com.projet.certifback.dao.message;
 
 import java.util.List;
 

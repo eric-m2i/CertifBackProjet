@@ -1,9 +1,9 @@
-package com.projet.certifback.controller.Channel.Dto;
+package com.projet.certifback.controller.channel.dto;
 
 import java.util.List;
 import java.util.Objects;
 
-import com.projet.certifback.dao.Message.Message;
+import com.projet.certifback.dao.message.Message;
 
 public class ChannelDTO {
     private String name;

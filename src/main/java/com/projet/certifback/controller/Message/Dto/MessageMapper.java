@@ -1,21 +1,11 @@
-package com.projet.certifback.controller.Message.Dto;
+package com.projet.certifback.controller.message.dto;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import com.projet.certifback.controller.channel.dto.ChannelMapper;
+import com.projet.certifback.controller.user.dto.UserMapper;
+import com.projet.certifback.dao.message.Message;
 
-import com.projet.certifback.controller.Channel.Dto.ChannelMapper;
-import com.projet.certifback.controller.User.Dto.UserMapper;
-import com.projet.certifback.dao.Message.Message;
-import com.projet.certifback.service.ChatService;
-
-import jakarta.websocket.server.PathParam;
 
 public class MessageMapper {
-
-    @Autowired
-    private ChatService chatService;
 
     public static MessageDTO convertFromEntityToDto(Message entity) {
         MessageDTO dto = new MessageDTO();

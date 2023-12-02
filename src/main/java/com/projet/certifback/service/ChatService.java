@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projet.certifback.dao.Channel.Channel;
-import com.projet.certifback.dao.Channel.ChannelRepository;
-import com.projet.certifback.dao.Message.Message;
-import com.projet.certifback.dao.Message.MessageRepository;
-import com.projet.certifback.dao.User.User;
-import com.projet.certifback.dao.User.UserRepository;
+import com.projet.certifback.dao.channel.Channel;
+import com.projet.certifback.dao.channel.ChannelRepository;
+import com.projet.certifback.dao.message.Message;
+import com.projet.certifback.dao.message.MessageRepository;
+import com.projet.certifback.dao.user.User;
+import com.projet.certifback.dao.user.UserRepository;
 
 @Service
 public class ChatService {
@@ -38,8 +38,9 @@ public class ChatService {
 
     public Channel updateChannel(Channel updateChannel, Long channelId) {
         Channel existingChannel = getChannelById(channelId);
-        if (existingChannel != null && existingChannel.getName().equals("GENERAL")) {
+        if (existingChannel != null && !existingChannel.getName().equals("GENERAL")) {
             updateChannel.setId(existingChannel.getId());
+            updateChannel.setMessages(existingChannel.getMessages());
             return updateChannel;
         }
         return null;
@@ -104,16 +105,16 @@ public class ChatService {
         return false;
     }
 
-    public Message addMessage(Long channelId,Long userId, String content) {
+    public Message addMessage(Long channelId, Long userId, Message content) {
         Channel channel = channelRepository.findById(channelId).orElse(null);
-        User User = userRepository.findById(userId).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
 
-        if (channel != null) {
+        if (channel != null && user != null) {
             Message message = new Message();
-            message.setContent(content);
+            message.setContent(content.getContent());
             message.setTimestamp(LocalDateTime.now());
             message.setChannel(channel);
-            message.setUser(User);
+            message.setUser(user);
 
             return messageRepository.save(message);
         }

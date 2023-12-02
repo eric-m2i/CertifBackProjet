@@ -1,4 +1,4 @@
-package com.projet.certifback.controller.Channel;
+package com.projet.certifback.controller.channel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projet.certifback.controller.Channel.Dto.ChannelDTO;
-import com.projet.certifback.controller.Channel.Dto.ChannelMapper;
-import com.projet.certifback.controller.Channel.Dto.ChannelPostDTO;
-import com.projet.certifback.dao.Channel.Channel;
+import com.projet.certifback.controller.channel.dto.ChannelDTO;
+import com.projet.certifback.controller.channel.dto.ChannelMapper;
+import com.projet.certifback.controller.channel.dto.ChannelPostDTO;
+import com.projet.certifback.dao.channel.Channel;
 import com.projet.certifback.service.ChatService;
 
 @RestController
@@ -39,8 +39,8 @@ public class ChannelRestController {
         return ResponseEntity.ok().body(dtos);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<?> getChannelById(@PathVariable("id") Long id) {
+    @GetMapping("{channelId}")
+    public ResponseEntity<?> getChannelById(@PathVariable("channelId") Long id) {
         Channel entity = chatService.getChannelById(id);
         if (entity == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Channel not found");
@@ -92,8 +92,8 @@ public class ChannelRestController {
                 .body("Chanel Not Found");
     }
 
-    @PatchMapping("{id}")
-    public ResponseEntity<String> patchChannel(@PathVariable("id") Long id,
+    @PatchMapping("{channelId}")
+    public ResponseEntity<String> patchChannel(@PathVariable("channelId") Long id,
     @RequestBody ChannelPostDTO ChannelPatchDTO) {
     Channel Channel = ChannelMapper.convertFromDtoToEntity(ChannelPatchDTO);
     Channel existingChannel = chatService.patchChannel(Channel, id);

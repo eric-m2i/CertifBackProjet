@@ -1,9 +1,8 @@
-package com.projet.certifback.dao.Channel;
+package com.projet.certifback.dao.channel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +12,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Objects;
 
-import com.projet.certifback.dao.Message.Message;
+import com.projet.certifback.dao.message.Message;
 
 @Entity
 @Table(name = "channels")
@@ -22,13 +21,13 @@ public class Channel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(name = "channel_name",nullable = false, unique = true, length = 100)
     private String name;
 
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "channel")
     private List<Message> messages = new ArrayList<>();
 
 

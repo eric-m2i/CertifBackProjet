@@ -1,4 +1,4 @@
-package com.projet.certifback.dao.User;
+package com.projet.certifback.dao.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

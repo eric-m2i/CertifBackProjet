@@ -1,9 +1,10 @@
-package com.projet.certifback.controller.Message.Dto;
+package com.projet.certifback.controller.message.dto;
 
 import java.time.LocalDateTime;
 
-import com.projet.certifback.controller.Channel.Dto.ChannelPostDTO;
-import com.projet.certifback.controller.User.Dto.UserPostDTO;
+import com.projet.certifback.controller.channel.dto.ChannelPostDTO;
+import com.projet.certifback.controller.user.dto.UserPostDTO;
+
 import java.util.Objects;
 
 

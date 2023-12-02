@@ -1,4 +1,4 @@
-package com.projet.certifback.controller.User;
+package com.projet.certifback.controller.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projet.certifback.controller.User.Dto.UserDTO;
-import com.projet.certifback.controller.User.Dto.UserMapper;
-import com.projet.certifback.controller.User.Dto.UserPostDTO;
-import com.projet.certifback.dao.User.User;
+import com.projet.certifback.controller.user.dto.UserDTO;
+import com.projet.certifback.controller.user.dto.UserMapper;
+import com.projet.certifback.controller.user.dto.UserPostDTO;
+import com.projet.certifback.dao.user.User;
 import com.projet.certifback.service.ChatService;
 
 @RestController
@@ -36,8 +36,8 @@ public class UserRestController {
         return ResponseEntity.ok().body(dtos);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<?> getUserById(@PathVariable("id") Long id) {
+    @GetMapping("{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable("userId") Long id) {
         User entity = chatService.getUserById(id);
         if (entity == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");

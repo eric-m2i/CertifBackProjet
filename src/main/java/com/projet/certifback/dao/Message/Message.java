@@ -1,4 +1,4 @@
-package com.projet.certifback.dao.Message;
+package com.projet.certifback.dao.message;
 
 import java.time.LocalDateTime;
 
@@ -13,8 +13,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Objects;
 
-import com.projet.certifback.dao.Channel.Channel;
-import com.projet.certifback.dao.User.User;
+import com.projet.certifback.dao.channel.Channel;
+import com.projet.certifback.dao.user.User;
 
 @Entity
 @Table(name = "messages")
@@ -23,10 +23,10 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(name = "contenu_message",nullable = false, length = 100)
     private String content;
 
-    @Column(nullable = false)
+    @Column(name = "date_heure",nullable = false)
     private LocalDateTime timestamp;
 
     @ManyToOne(cascade = CascadeType.ALL)

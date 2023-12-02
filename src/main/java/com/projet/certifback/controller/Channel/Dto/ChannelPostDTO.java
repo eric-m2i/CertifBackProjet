@@ -1,4 +1,4 @@
-package com.projet.certifback.controller.Channel.Dto;
+package com.projet.certifback.controller.channel.dto;
 import java.util.Objects;
 
 public class ChannelPostDTO {

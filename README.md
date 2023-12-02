@@ -9,6 +9,8 @@
 
 # Sommaire
 
+# Sommaire
+
 1. [Projet de Chat en Ligne avec Spring et Angular](#projet-de-chat-en-ligne-avec-spring-et-angular)
 
 2. [Fonctionnalités](#fonctionnalités)
@@ -21,18 +23,24 @@
 
 5. [API Reference](#api-reference)
    - [Récupérer la liste de tous les canaux](#1-récupérer-la-liste-de-tous-les-canaux)
-   - [Créer un nouveau canal](#2-créer-un-nouveau-canal)
-   - [Supprimer un canal existant](#3-supprimer-un-canal-existant)
-   - [Récupérer la liste de tous les messages dans un canal](#4-récupérer-la-liste-de-tous-les-messages-dans-un-canal)
-   - [Ajouter un nouveau message dans un canal](#5-ajouter-un-nouveau-message-dans-un-canal)
+   - [Récupérer les détails d'un seul canal](#2-récupérer-les-détails-dun-seul-canal)
+   - [Créer un nouveau canal](#3-créer-un-nouveau-canal)
+   - [Remplacer un canal existant](#4-remplacer-un-canal-existant)
+   - [Remplacement partiel d'un canal existant](#5-remplacement-partiel-dun-canal-existant)
+   - [Supprimer un canal existant](#6-supprimer-un-canal-existant)
+   - [Récupérer la liste de tous les utilisateurs](#7-récupérer-la-liste-de-tous-les-utilisateurs)
+   - [Récupérer les détails d'un utilisateur](#8-récupérer-les-détails-dun-utilisateur)
+   - [Créer un nouvel utilisateur](#9-créer-un-nouvel-utilisateur)
+   - [Récupérer la liste de tous les messages dans un canal](#10-récupérer-la-liste-de-tous-les-messages-dans-un-canal)
+   - [Ajouter un nouveau message dans un canal](#11-ajouter-un-nouveau-message-dans-un-canal)
 
 6. [Comment Exécuter le Projet Localement](#comment-exécuter-le-projet-localement)
 
-7. [Auteurs](#auteurs)
+7. [Documentation et Resources](#documentation-et-resources)
 
-8. [Licence](#licence)
+8. [Auteurs](#auteurs)
 
-
+9. [Licence](#licence)
 # Projet de Chat en Ligne avec Spring et Angular
 
 Bienvenue dans le projet de chat en ligne basé sur Spring. Cette application de chat permet aux utilisateurs de créer des canaux, d'envoyer des messages et d'interagir avec d'autres utilisateurs de manière simple et intuitive.
@@ -78,7 +86,17 @@ Le projet est organisé en packages de la manière suivante :
 GET /api/channels
 ```
 
-#### 2. Poster un nouveau Canal
+#### 2. Récupérer les détails d'un seul canal
+
+```http
+GET /api/channels/{channelId}
+```
+
+| Paramètre | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `channelId` | `Long` | **Obligatoire**. Identifiant du canal à récupérer |
+
+#### 3. Créer un nouveau canal
 
 ```http
 POST /api/channels
@@ -86,9 +104,31 @@ POST /api/channels
 
 | Paramètre | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `channelName` | `String` | **Required**. Nom du canal à créer |
+| `ChannelPostDTO` | `ChannelPostDTO` | **Obligatoire**. Données pour créer le canal |
 
-#### 3. Supprimer un canal existant
+#### 4. Remplacer un canal existant
+
+```http
+PUT /api/channels/{channelId}
+```
+
+| Paramètre | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `ChannelPostDTO` | `ChannelPostDTO` | **Obligatoire**. Données pour remplacer le canal |
+| `channelId` | `Long` | **Obligatoire**. Identifiant du canal à remplacer |
+
+#### 5. Remplacement partiel d'un canal existant
+
+```http
+PATCH /api/channels/{channelId}
+```
+
+| Paramètre | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `ChannelPostDTO` | `ChannelPostDTO` | **Obligatoire**. Données pour remplacer partiellement le canal |
+| `channelId` | `Long` | **Obligatoire**. Identifiant du canal à remplacer partiellement |
+
+#### 6. Supprimer un canal existant
 
 ```http
 DELETE /api/channels/{channelId}
@@ -96,9 +136,35 @@ DELETE /api/channels/{channelId}
 
 | Paramètre | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `channelId` | `Long` | **Required**. Identifiant du canal à supprimer |
+| `channelId` | `Long` | **Obligatoire**. Identifiant du canal à supprimer |
 
-#### 4. Récupérer la liste de tous les messages dans un canal
+#### 7. Récupérer la liste de tous les utilisateur
+
+```http
+GET /api/users
+```
+
+#### 8. Récupérer la liste d'un utilisateur
+
+```http
+GET /api/users/{userId}
+```
+
+| Paramètre | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `userId` | `Long` | **Obligatoire**.  Identifiant du l'utilisateur |
+
+#### 9. Création d'un utilisateur
+
+```http
+POST /api/users
+```
+
+| Paramètre | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `UserPostDTO` | `UserPostDTO` | **Obligatoire**.  Données pour créer l'utilisateur |
+
+#### 10. Récupérer la liste de tous les messages dans un canal
 
 ```http
 GET /api/channels/{channelId}/messages
@@ -106,17 +172,19 @@ GET /api/channels/{channelId}/messages
 
 | Paramètre | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `channelId` | `Long` | **Required**.  Identifiant du canal|
+| `channelId` | `Long` | **Obligatoire**.  Identifiant du canal |
 
-#### 5. Ajouter un nouveau message dans un canal
+#### 11. Ajouter un nouveau message dans un canal
 
 ```http
-POST /api/channels/{channelId}/messages
+POST {channelId}/{userId}/messages
 ```
 
 | Paramètre | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `content` | `String` | **Required**.  Contenu du message|
+| `channelId` | `Long` | **Obligatoire**.  Identifiant du canal à utiliser |
+| `userId` | `Long` | **Obligatoire**.  Identifiant du l'utilisateur à utiliser |
+| `messagePostDTO` | `messagePostDTO` | **Obligatoire**.  Données pour créer le message |
 
 ## Comment Exécuter le Projet Localement
 
@@ -124,6 +192,27 @@ POST /api/channels/{channelId}/messages
 2. Accédez au répertoire du projet : `cd Back-Projet`
 3. Exécutez l'application : `./mvnw spring-boot:run`
 4. Ouvrez votre navigateur à l'adresse : `http://localhost:8080`
+
+## Documentation et Resources
+
+Cette section fournit des informations détaillées sur l'utilisation du projet, y compris des guides d'installation, des exemples d'utilisation, et d'autres ressources utiles. Veuillez consulter la documentation pour obtenir des instructions complètes sur la configuration, l'exécution et l'exploitation du projet.
+
+### Configuration Application
+
+Le fichier de configuration `application.properties` se trouve dans le répertoire `./src/main/resources` et peut nécessiter des modifications pour adapter l'application à votre environnement. Assurez-vous de vérifier et de mettre à jour les paramètres appropriés tels que les informations de base de données, les ports, etc...
+
+### Fichiers Supplémentaires
+
+Certains fichiers importants sont disponibles dans le répertoire `./src/main/resources/personal` :
+
+- `bdd.sql` : Le script SQL de la base de données utilisé par le projet.
+- `uml.plantuml` : Le fichier UML utilisé pour modéliser la structure du projet.
+- `postman_collection.json` : Le fichier Postman Collection qui contient des exemples de requêtes pour tester l'API.
+
+### Documentation Technique
+
+La dépendance Swagger a été intégrée pour faciliter l'accès à la documentation technique de l'API. Vous pouvez consulter la documentation en accédant à l'adresse suivante une fois L'API lancer: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
 
 ## Auteurs
 

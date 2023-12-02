@@ -12,16 +12,16 @@ CREATE TABLE Users (
 
 CREATE TABLE Channels (
     id BIGSERIAL PRIMARY KEY,
-    nom_canal VARCHAR(100) NOT NULL UNIQUE,
+    channel_name VARCHAR(100) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
 CREATE TABLE Messages (
     id BIGSERIAL PRIMARY KEY,
-    Contenu_message TEXT NOT NULL,
-    Date_heure TIMESTAMP NOT NULL,
+    contenu_message TEXT NOT NULL,
+    date_heure TIMESTAMP NOT NULL,
     user_id BIGINT NOT NULL,
-    canal_id BIGINT NOT NULL,
+    channel_id BIGINT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (canal_id) REFERENCES Channels(id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (channel_id) REFERENCES Channels(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

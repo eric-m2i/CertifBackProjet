@@ -1,10 +1,10 @@
-package com.projet.certifback.controller.User.Dto;
+package com.projet.certifback.controller.user.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projet.certifback.dao.Message.Message;
-import com.projet.certifback.dao.User.User;
+import com.projet.certifback.dao.message.Message;
+import com.projet.certifback.dao.user.User;
 
 public class UserMapper {
 
@@ -26,7 +26,7 @@ public class UserMapper {
 
         List<Message> messages = new ArrayList<>();
         for (Message message : entity.getMessages()) {
-            message.setChannel(null);
+            message.getChannel().setMessages(null);
             message.setUser(null);
             messages.add(message);
         }

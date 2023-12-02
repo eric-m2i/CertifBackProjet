@@ -1,9 +1,9 @@
-package com.projet.certifback.controller.User.Dto;
+package com.projet.certifback.controller.user.dto;
 
 import java.util.List;
 import java.util.Objects;
 
-import com.projet.certifback.dao.Message.Message;
+import com.projet.certifback.dao.message.Message;
 
 public class UserDTO {
     private String nom;

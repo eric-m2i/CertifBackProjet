@@ -1,4 +1,4 @@
-package com.projet.certifback.controller.User.Dto;
+package com.projet.certifback.controller.user.dto;
 import java.util.Objects;
 
 public class UserPostDTO {

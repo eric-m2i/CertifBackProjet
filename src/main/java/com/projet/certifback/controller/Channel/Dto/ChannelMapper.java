@@ -1,16 +1,16 @@
-package com.projet.certifback.controller.Channel.Dto;
+package com.projet.certifback.controller.channel.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projet.certifback.dao.Channel.Channel;
-import com.projet.certifback.dao.Message.Message;
+import com.projet.certifback.dao.channel.Channel;
+import com.projet.certifback.dao.message.Message;
 
 public class ChannelMapper {
         public static ChannelPostDTO convertFromEntityToPostDto(Channel entity) {
         ChannelPostDTO postDTO = new ChannelPostDTO();
-        postDTO.setDescription(null);
-        postDTO.setName(null);
+        postDTO.setDescription(entity.getDescription());
+        postDTO.setName(entity.getName());
         return postDTO;
     }
 
@@ -22,7 +22,7 @@ public class ChannelMapper {
         List<Message> messages = new ArrayList<>();
         for (Message message : entity.getMessages()) {
             message.setChannel(null);
-            message.setUser(null);
+            message.getUser().setMessages(null);
             messages.add(message);
         }
         dto.setMessages(messages);
