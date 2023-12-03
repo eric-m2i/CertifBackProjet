@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projet.certifback.controller.message.dto.MessageDTO;
 import com.projet.certifback.controller.message.dto.MessageMapper;
 import com.projet.certifback.controller.message.dto.MessagePostDTO;
-import com.projet.certifback.dao.message.Message;
+import com.projet.certifback.dao.entity.Message;
 import com.projet.certifback.service.ChatService;
 
 @RestController

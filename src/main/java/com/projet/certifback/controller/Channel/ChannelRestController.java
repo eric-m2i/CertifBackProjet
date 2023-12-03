@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projet.certifback.controller.channel.dto.ChannelDTO;
 import com.projet.certifback.controller.channel.dto.ChannelMapper;
 import com.projet.certifback.controller.channel.dto.ChannelPostDTO;
-import com.projet.certifback.dao.channel.Channel;
+import com.projet.certifback.dao.entity.Channel;
 import com.projet.certifback.service.ChatService;
 
 @RestController

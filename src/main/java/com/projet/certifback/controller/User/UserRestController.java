@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projet.certifback.controller.user.dto.UserDTO;
 import com.projet.certifback.controller.user.dto.UserMapper;
 import com.projet.certifback.controller.user.dto.UserPostDTO;
-import com.projet.certifback.dao.user.User;
+import com.projet.certifback.dao.entity.User;
 import com.projet.certifback.service.ChatService;
 
 @RestController

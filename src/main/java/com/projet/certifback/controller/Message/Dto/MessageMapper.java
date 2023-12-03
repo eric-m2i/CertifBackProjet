@@ -2,7 +2,7 @@ package com.projet.certifback.controller.message.dto;
 
 import com.projet.certifback.controller.channel.dto.ChannelMapper;
 import com.projet.certifback.controller.user.dto.UserMapper;
-import com.projet.certifback.dao.message.Message;
+import com.projet.certifback.dao.entity.Message;
 
 
 public class MessageMapper {

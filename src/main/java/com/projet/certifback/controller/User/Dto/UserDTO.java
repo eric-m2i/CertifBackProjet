@@ -3,7 +3,7 @@ package com.projet.certifback.controller.user.dto;
 import java.util.List;
 import java.util.Objects;
 
-import com.projet.certifback.dao.message.Message;
+import com.projet.certifback.dao.entity.Message;
 
 public class UserDTO {
     private String nom;

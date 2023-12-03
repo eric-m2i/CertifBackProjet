@@ -1,4 +1,4 @@
-package com.projet.certifback.dao.message;
+package com.projet.certifback.dao.entity;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Objects;
-
-import com.projet.certifback.dao.channel.Channel;
-import com.projet.certifback.dao.user.User;
 
 @Entity
 @Table(name = "messages")

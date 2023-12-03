@@ -3,8 +3,8 @@ package com.projet.certifback.controller.user.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projet.certifback.dao.message.Message;
-import com.projet.certifback.dao.user.User;
+import com.projet.certifback.dao.entity.Message;
+import com.projet.certifback.dao.entity.User;
 
 public class UserMapper {
 

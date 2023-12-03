@@ -3,7 +3,7 @@ package com.projet.certifback.controller.channel.dto;
 import java.util.List;
 import java.util.Objects;
 
-import com.projet.certifback.dao.message.Message;
+import com.projet.certifback.dao.entity.Message;
 
 public class ChannelDTO {
     private String name;

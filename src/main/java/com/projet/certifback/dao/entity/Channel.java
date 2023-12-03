@@ -1,4 +1,4 @@
-package com.projet.certifback.dao.channel;
+package com.projet.certifback.dao.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Objects;
-
-import com.projet.certifback.dao.message.Message;
 
 @Entity
 @Table(name = "channels")

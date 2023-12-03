@@ -73,10 +73,11 @@ Bienvenue dans le projet de chat en ligne basé sur Spring. Cette application de
 
 Le projet est organisé en packages de la manière suivante :
 
-- `com.projet.certifback.dao`: Contient les entités JPA (Java Persistence API) représentant les données.
+- `com.projet.certifback.dao.entity`: Contient les entités JPA (Java Persistence API) représentant les données.
 - `com.projet.certifback.service`: Contient la logique métier de l'application.
-- `com.projet.certifback.dao`: Contient les interfaces de repository pour accéder aux données.
-- `com.projet.certifback.controller`
+- `com.projet.certifback.dao.repository`: Contient les interfaces de repository pour accéder aux données.
+- `com.projet.certifback.controller`: Ce package est dédié aux classes et méthodes des contrôleurs, responsables de la gestion des requêtes HTTP, de la coordination des actions et de la communication avec les services métier.
+
 
 ## API Reference
 
@@ -177,7 +178,7 @@ GET /api/channels/{channelId}/messages
 #### 11. Ajouter un nouveau message dans un canal
 
 ```http
-POST {channelId}/{userId}/messages
+POST /api/channels/{channelId}/{userId}/messages
 ```
 
 | Paramètre | Type     | Description                |

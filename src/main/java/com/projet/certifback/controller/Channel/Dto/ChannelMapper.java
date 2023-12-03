@@ -3,8 +3,8 @@ package com.projet.certifback.controller.channel.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projet.certifback.dao.channel.Channel;
-import com.projet.certifback.dao.message.Message;
+import com.projet.certifback.dao.entity.Channel;
+import com.projet.certifback.dao.entity.Message;
 
 public class ChannelMapper {
         public static ChannelPostDTO convertFromEntityToPostDto(Channel entity) {

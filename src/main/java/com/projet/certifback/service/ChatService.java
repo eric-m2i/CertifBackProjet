@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projet.certifback.dao.channel.Channel;
-import com.projet.certifback.dao.channel.ChannelRepository;
-import com.projet.certifback.dao.message.Message;
-import com.projet.certifback.dao.message.MessageRepository;
-import com.projet.certifback.dao.user.User;
-import com.projet.certifback.dao.user.UserRepository;
+import com.projet.certifback.dao.entity.Channel;
+import com.projet.certifback.dao.entity.Message;
+import com.projet.certifback.dao.entity.User;
+import com.projet.certifback.dao.repository.ChannelRepository;
+import com.projet.certifback.dao.repository.MessageRepository;
+import com.projet.certifback.dao.repository.UserRepository;
 
 @Service
 public class ChatService {
