@@ -1,17 +1,13 @@
 package com.projet.certifback;
 
 import com.projet.certifback.dao.entity.Channel;
-import com.projet.certifback.dao.entity.Message;
-import com.projet.certifback.dao.entity.User;
 import com.projet.certifback.service.ChatService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

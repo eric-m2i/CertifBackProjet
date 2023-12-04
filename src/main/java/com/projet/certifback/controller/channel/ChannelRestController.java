@@ -86,7 +86,7 @@ public class ChannelRestController {
             } catch (DataIntegrityViolationException e) {
                 return ResponseEntity
                         .status(HttpStatus.CONFLICT)
-                        .body("Error: JSON");
+                        .body("Error: JSON or Channel name should be different from 'General' ");
             } catch (Exception e) {
                 return ResponseEntity
                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
