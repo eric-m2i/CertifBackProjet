@@ -35,7 +35,7 @@ public class MessageRestController {
         return ResponseEntity.ok().body(dtos);
     }
 
-    @PostMapping("{channelId}/{userId}/messages")
+    @PostMapping("{channelId}/users/{userId}/messages")
     public ResponseEntity<?> addMessage(@PathVariable("channelId") Long channelId,
             @PathVariable("userId") Long userId,
             @RequestBody MessagePostDTO messagePostDTO) {
