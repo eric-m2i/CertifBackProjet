@@ -9,8 +9,6 @@
 
 # Sommaire
 
-# Sommaire
-
 1. [Projet de Chat en Ligne avec Spring et Angular](#projet-de-chat-en-ligne-avec-spring-et-angular)
 
 2. [Fonctionnalités](#fonctionnalités)
