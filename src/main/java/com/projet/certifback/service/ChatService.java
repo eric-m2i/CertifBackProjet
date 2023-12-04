@@ -33,7 +33,10 @@ public class ChatService {
     }
 
     public Channel saveChannel(Channel newChannel) {
-        return channelRepository.save(newChannel);
+        if (!newChannel.getName().equalsIgnoreCase("general")) {
+            return channelRepository.save(newChannel);
+        }
+        return null;
     }
 
     public Channel updateChannel(Channel updateChannel, Long channelId) {
