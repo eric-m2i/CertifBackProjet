@@ -15,10 +15,12 @@ import com.projet.certifback.dao.repository.UserRepository;
 
 @Service
 public class ChatService {
+    public static final String CANAL_GENERAL = "GENERAL";
     @Autowired
     private ChannelRepository channelRepository;
 
     @Autowired
+
     private MessageRepository messageRepository;
 
     @Autowired
@@ -33,7 +35,7 @@ public class ChatService {
     }
 
     public Channel saveChannel(Channel newChannel) {
-        if (!newChannel.getName().equalsIgnoreCase("general")) {
+        if (!newChannel.getName().equalsIgnoreCase(CANAL_GENERAL)) {
             return channelRepository.save(newChannel);
         }
         return null;
@@ -41,7 +43,7 @@ public class ChatService {
 
     public Channel updateChannel(Channel updateChannel, Long channelId) {
         Channel existingChannel = getChannelById(channelId);
-        if (existingChannel != null && !existingChannel.getName().equals("GENERAL")) {
+        if (existingChannel != null && !existingChannel.getName().equals(CANAL_GENERAL)) {
             updateChannel.setId(existingChannel.getId());
             updateChannel.setMessages(existingChannel.getMessages());
             return updateChannel;
@@ -53,7 +55,7 @@ public class ChatService {
         Channel existingChannel = getChannelById(id);
 
         if (existingChannel != null) {
-            if (channelPatch.getName() != null && !existingChannel.getName().equals("GENERAL")) {
+            if (channelPatch.getName() != null && !existingChannel.getName().equals(CANAL_GENERAL)) {
                 existingChannel.setName(channelPatch.getName());
             }
             if (channelPatch.getDescription() != null) {
@@ -68,7 +70,7 @@ public class ChatService {
 
     public Boolean deleteChannel(Long channelId) {
         Channel channelRecup = getChannelById(channelId);
-        if (channelRecup != null && !channelRecup.getName().equals("GENERAL")) {
+        if (channelRecup != null && !channelRecup.getName().equals(CANAL_GENERAL)) {
             channelRepository.deleteById(channelId);
             return true;
         }
