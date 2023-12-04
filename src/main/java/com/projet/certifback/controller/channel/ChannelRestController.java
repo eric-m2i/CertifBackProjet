@@ -53,10 +53,15 @@ public class ChannelRestController {
     public ResponseEntity<String> createChannel(@RequestBody ChannelPostDTO ChannelPostDTO) {
         Channel newChannel = ChannelMapper.convertFromDtoToEntity(ChannelPostDTO);
         try {
-            chatService.saveChannel(newChannel);
+            Channel newChannelTested = chatService.saveChannel(newChannel);
+            if (newChannelTested != null) {
+                return ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body("Channel created successfully");
+            }
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("Channel created successfully");
+                    .body("Channel name should be different from 'General' ");
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
@@ -69,7 +74,8 @@ public class ChannelRestController {
     }
 
     @PutMapping("{channelId}")
-    public ResponseEntity<String> putChannel(@RequestBody ChannelPostDTO channelPutDTO, @PathVariable("channelId") Long channelId) {
+    public ResponseEntity<String> putChannel(@RequestBody ChannelPostDTO channelPutDTO,
+            @PathVariable("channelId") Long channelId) {
         Channel channel = ChannelMapper.convertFromDtoToEntity(channelPutDTO);
         Channel existingChanel = chatService.updateChannel(channel, channelId);
         if (existingChanel != null) {
@@ -94,19 +100,19 @@ public class ChannelRestController {
 
     @PatchMapping("{channelId}")
     public ResponseEntity<String> patchChannel(@PathVariable("channelId") Long id,
-    @RequestBody ChannelPostDTO ChannelPatchDTO) {
-    Channel Channel = ChannelMapper.convertFromDtoToEntity(ChannelPatchDTO);
-    Channel existingChannel = chatService.patchChannel(Channel, id);
-    if (existingChannel == null) {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Channel not found");
-    }
-    try {
-    chatService.saveChannel(existingChannel);
-    return ResponseEntity.ok("Channel Patch successfully");
-    } catch (Exception e) {
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: "
-    + e.getMessage());
-    }
+            @RequestBody ChannelPostDTO ChannelPatchDTO) {
+        Channel Channel = ChannelMapper.convertFromDtoToEntity(ChannelPatchDTO);
+        Channel existingChannel = chatService.patchChannel(Channel, id);
+        if (existingChannel == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Channel not found");
+        }
+        try {
+            chatService.saveChannel(existingChannel);
+            return ResponseEntity.ok("Channel Patch successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: "
+                    + e.getMessage());
+        }
     }
 
     @DeleteMapping("{channelId}")
