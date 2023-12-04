@@ -178,7 +178,7 @@ GET /api/channels/{channelId}/messages
 #### 11. Ajouter un nouveau message dans un canal
 
 ```http
-POST /api/channels/{channelId}/{userId}/messages
+POST /api/channels/{channelId}/users/{userId}/messages
 ```
 
 | Paramètre | Type     | Description                |
