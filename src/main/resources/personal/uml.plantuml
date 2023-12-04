@@ -1,0 +1,93 @@
+@startuml
+
+package dao.message {
+    class Message {
+        -id: Long <<PK>>
+        -content: String
+        -timestamp: LocalDateTime
+        -channel: Channel <<FK>>
+        -user: User <<FK>>
+
+        +Message()
+        +Message(content: String, timestamp: LocalDateTime, channel: Channel, user: User)
+        +getId(): Long
+        +setId(id: Long): void
+        +getContent(): String
+        +setContent(content: String): void
+        +getTimestamp(): LocalDateTime
+        +setTimestamp(timestamp: LocalDateTime): void
+        +getChannel(): Channel
+        +setChannel(channel: Channel): void
+        +getUser(): User
+        +setUser(user: User): void
+        +id(id: Long): Message
+        +content(content: String): Message
+        +timestamp(timestamp: LocalDateTime): Message
+        +channel(channel: Channel): Message
+        +user(user: User): Message
+        +toString(): String
+    }
+}
+
+package dao.user {
+    class User {
+        -id: Long <<PK>>
+        -nom: String
+        -prenom: String
+        -email: String
+        -pseudo: String
+        -messages: List<Message>
+
+        +User()
+        +User(nom: String, prenom: String, email: String, pseudo: String, messages: List<Message>)
+        +getId(): Long
+        +setId(id: Long): void
+        +getNom(): String
+        +setNom(nom: String): void
+        +getPrenom(): String
+        +setPrenom(prenom: String): void
+        +getEmail(): String
+        +setEmail(email: String): void
+        +getPseudo(): String
+        +setPseudo(pseudo: String): void
+        +getMessages(): List<Message>
+        +setMessages(messages: List<Message>): void
+        +id(id: Long): User
+        +nom(nom: String): User
+        +prenom(prenom: String): User
+        +email(email: String): User
+        +pseudo(pseudo: String): User
+        +messages(messages: List<Message>): User
+        +toString(): String
+    }
+}
+
+package dao.channel {
+    class Channel {
+        -id: Long <<PK>>
+        -name: String
+        -description: String
+        -messages: List<Message>
+
+        +Channel()
+        +Channel(name: String, description: String, messages: List<Message>)
+        +getId(): Long
+        +setId(id: Long): void
+        +getName(): String
+        +setName(name: String): void
+        +getDescription(): String
+        +setDescription(description: String): void
+        +getMessages(): List<Message>
+        +setMessages(messages: List<Message>): void
+        +id(id: Long): Channel
+        +name(name: String): Channel
+        +description(description: String): Channel
+        +messages(messages: List<Message>): Channel
+        +toString(): String
+    }
+}
+
+Message "1-1  " o--* "0-N" User : Écrire
+Message "1-1 " o--* "0-N  " Channel : Diffuser
+
+@enduml
