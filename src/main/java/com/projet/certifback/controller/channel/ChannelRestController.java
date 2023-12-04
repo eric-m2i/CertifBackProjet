@@ -60,7 +60,7 @@ public class ChannelRestController {
                         .body("Channel created successfully");
             }
             return ResponseEntity
-                    .status(HttpStatus.CREATED)
+                    .status(HttpStatus.CONFLICT)
                     .body("Channel name should be different from 'General' ");
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity
