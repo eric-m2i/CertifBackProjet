@@ -26,4 +26,4 @@ CREATE TABLE Messages (
     FOREIGN KEY (channel_id) REFERENCES Channels(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO CHANNELS (channel_name, description) VALUES ('GENERAL', 'Canal General');
+INSERT INTO CHANNELS (channel_name, description) VALUES ('GENERAL', 'Canal General ');
