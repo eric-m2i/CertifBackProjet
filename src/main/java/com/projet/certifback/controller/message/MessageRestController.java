@@ -31,8 +31,8 @@ public class MessageRestController {
 
     @PostMapping("{channelId}/users/{userId}/messages")
     public ResponseEntity<?> addMessage(@PathVariable("channelId") Long channelId,
-                                        @PathVariable("userId") Long userId,
-                                        @RequestBody MessagePostDTO messagePostDTO) {
+            @PathVariable("userId") Long userId,
+            @RequestBody MessagePostDTO messagePostDTO) {
         try {
             if (channelId.equals(messagePostDTO.getChannel().getId()) &&
                     userId.equals(messagePostDTO.getUser().getId())) {
