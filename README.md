@@ -1,4 +1,5 @@
 
+```
 
 ░█████╗░███╗░░██╗███████╗░█████╗░██╗░░██╗░█████╗░████████╗
 ██╔══██╗████╗░██║██╔════╝██╔══██╗██║░░██║██╔══██╗╚══██╔══╝
@@ -6,6 +7,8 @@
 ██║░░██║██║╚████║██╔══╝░░██║░░██╗██╔══██║██╔══██║░░░██║░░░
 ╚█████╔╝██║░╚███║███████╗╚█████╔╝██║░░██║██║░░██║░░░██║░░░
 ░╚════╝░╚═╝░░╚══╝╚══════╝░╚════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░
+
+```
 
 # Sommaire
 
@@ -64,7 +67,7 @@ Bienvenue dans le projet de chat en ligne basé sur Spring. Cette application de
 - **Maven :** Utilisé comme système de gestion de projets, Maven simplifie la configuration et la gestion des dépendances, garantissant une structure de projet cohérente.
 - **Java 17 :** Adopté comme version principale du langage de programmation, Java 17 offre des fonctionnalités modernes et des améliorations de performance, contribuant à la robustesse et à la sécurité de l'application.
 - **Spring Service, Repository :** Utilisés pour la mise en œuvre des couches de services métier et d'accès aux données, ces composants de Spring facilitent la séparation des préoccupations et favorisent la maintenabilité du code.
-- **Angular :** Moteur de template utilisé pour la génération des pages HTML, assurant une expérience utilisateur dynamique.
+- **Angular 17 :** Moteur de template utilisé pour la génération des pages HTML, assurant une expérience utilisateur dynamique.
 - **PostgreSQL :** Base de données relationnelle intégrée pour le développement, assurant la stabilité et la performance.
 
 ## Structure du Projet
@@ -75,6 +78,7 @@ Le projet est organisé en packages de la manière suivante :
 - `com.projet.certifback.service`: Contient la logique métier de l'application.
 - `com.projet.certifback.dao.repository`: Contient les interfaces de repository pour accéder aux données.
 - `com.projet.certifback.controller`: Ce package est dédié aux classes et méthodes des contrôleurs, responsables de la gestion des requêtes HTTP, de la coordination des actions et de la communication avec les services métier.
+- `com.projet.certifback.config`: Contient une configuration permettant de gérer la politique Cross-Origin Resource Sharing (CORS) de l'application Spring. CORS est un mécanisme de sécurité qui permet ou restreint les ressources d'une page web à être demandées à partir d'un autre domaine que le domaine sous-jacent qui a servi la ressource.
 
 
 ## API Reference
@@ -190,7 +194,7 @@ POST /api/channels/{channelId}/users/{userId}/messages
 1. Clonez le dépôt : `git clone https://github.com/vincentdevweb/Back-Projet`
 2. Accédez au répertoire du projet : `cd Back-Projet`
 3. Exécutez l'application : `./mvnw spring-boot:run`
-4. Ouvrez votre navigateur à l'adresse : `http://localhost:8080`
+4. Télécharger et executer la partie front du projet : [Front-Projet](https://github.com/matstrza/ProjectFrontEnd)
 
 ## Documentation et Resources
 
