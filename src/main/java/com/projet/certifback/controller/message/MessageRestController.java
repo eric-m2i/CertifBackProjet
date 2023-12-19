@@ -20,7 +20,7 @@ public class MessageRestController {
     private ChatService chatService;
 
     @GetMapping("{channelId}/messages")
-    public ResponseEntity<?> getMessagesByChannel(@PathVariable("channelId") Long channelId) {
+    public ResponseEntity<List<MessageDTO>> getMessagesByChannel(@PathVariable("channelId") Long channelId) {
         List<Message> entities = chatService.getMessagesByChannel(channelId);
         List<MessageDTO> dtos = new ArrayList<>();
         for (Message entity : entities)
@@ -42,16 +42,16 @@ public class MessageRestController {
 
                 return ResponseEntity
                         .status(HttpStatus.CREATED)
-                        .body("Message ajouté avec succès");
+                        .body("{\"message\": \"Message ajouté avec succès\"}");
             } else {
                 return ResponseEntity
                         .status(HttpStatus.UNAUTHORIZED)
-                        .body("Message pas ajouté car non correspondance des identifiants");
+                        .body("{\"message\": \"Message pas ajouté car non correspondance des identifiants\"}");
             }
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Une erreur s'est produite lors de l'ajout du message." + e.getMessage());
+                    .body("{\"message\": \"Une erreur s'est produite lors de l'ajout du message." + e.getMessage() + "\"}");
         }
     }
 

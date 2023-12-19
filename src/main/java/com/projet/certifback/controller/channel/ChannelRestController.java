@@ -43,7 +43,9 @@ public class ChannelRestController {
     public ResponseEntity<?> getChannelById(@PathVariable("channelId") Long id) {
         Channel entity = chatService.getChannelById(id);
         if (entity == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Channel not found");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("{\"message\": \"Channel not found\"}");
         }
         ChannelDTO dto = ChannelMapper.convertFromEntityToDto(entity);
         return ResponseEntity.ok(dto);
@@ -57,19 +59,19 @@ public class ChannelRestController {
             if (newChannelTested != null) {
                 return ResponseEntity
                         .status(HttpStatus.CREATED)
-                        .body("Channel created successfully");
+                        .body("{\"message\": \"Channel created successfully\"}");
             }
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
-                    .body("Channel name should be different from 'General' ");
+                    .body("{\"message\": \"Channel name should be different from 'General' \"}");
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
-                    .body("Error: JSON");
+                    .body("{\"message\": \"Error: JSON\"}");
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error: " + e.getMessage());
+                    .body("{\"message\": \"Error: " + e.getMessage() + "\"}");
         }
     }
 
@@ -82,20 +84,20 @@ public class ChannelRestController {
             try {
                 chatService.saveChannel(existingChanel);
                 return ResponseEntity
-                        .ok("Chanel Put successfully");
+                        .ok("{\"message\": \"Chanel Put successfully\"}");
             } catch (DataIntegrityViolationException e) {
                 return ResponseEntity
                         .status(HttpStatus.CONFLICT)
-                        .body("Error: JSON or Channel name should be different from 'General' ");
+                        .body("{\"message\": \"Error: JSON or Channel name should be different from 'General' \"}");
             } catch (Exception e) {
                 return ResponseEntity
                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("Error: " + e.getMessage());
+                        .body("{\"message\": \"Error: " + e.getMessage() + "\"}");
             }
         }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body("Chanel Not Found");
+                .body("{\"message\": \"Chanel Not Found\"}");
     }
 
     @PatchMapping("{channelId}")
@@ -104,22 +106,30 @@ public class ChannelRestController {
         Channel Channel = ChannelMapper.convertFromDtoToEntity(ChannelPatchDTO);
         Channel existingChannel = chatService.patchChannel(Channel, id);
         if (existingChannel == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Channel not found");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("{\"message\": \"Chanel Not Found\"}");
         }
         try {
             chatService.saveChannel(existingChannel);
-            return ResponseEntity.ok("Channel Patch successfully");
+            return ResponseEntity
+                    .ok("{\"message\": \"Chanel Patch successfully\"}");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: "
-                    + e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"message\": \"Error: " + e.getMessage() + "\"}");
         }
     }
 
     @DeleteMapping("{channelId}")
     public ResponseEntity<String> deleteChannel(@PathVariable("channelId") Long channelId) {
         if (chatService.deleteChannel(channelId)) {
-            return ResponseEntity.ok("Channel deleted successfully");
+            return ResponseEntity
+                    .status(204)
+                    .body("{\"message\": \"Chanel Deleted successfully\"}");
         } else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Channel not found");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("{\"message\": \"Chanel Not Found\"}");
     }
 }

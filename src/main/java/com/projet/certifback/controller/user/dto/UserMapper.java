@@ -19,6 +19,7 @@ public class UserMapper {
 
     public static UserDTO convertFromEntityToDto(User entity) {
         UserDTO dto = new UserDTO();
+        dto.setId(entity.getId());
         dto.setEmail(entity.getEmail());
         dto.setNom(entity.getNom());
         dto.setPrenom(entity.getPrenom());

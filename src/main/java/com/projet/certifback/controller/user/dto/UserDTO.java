@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.projet.certifback.dao.entity.Message;
 
 public class UserDTO {
+    private Long id;
     private String nom;
     private String prenom;
     private String email;
@@ -22,6 +23,15 @@ public class UserDTO {
         this.email = email;
         this.pseudo = pseudo;
         this.messages = messages;
+    }
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNom() {

@@ -40,10 +40,13 @@ public class UserRestController {
     public ResponseEntity<?> getUserById(@PathVariable("userId") Long id) {
         User entity = chatService.getUserById(id);
         if (entity == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("{\"message\": \"User not found\"}");
         }
         UserDTO dto = UserMapper.convertFromEntityToDto(entity);
-        return ResponseEntity.ok(dto);
+        return ResponseEntity
+                .ok(dto);
     }
 
     @PostMapping
@@ -53,15 +56,15 @@ public class UserRestController {
             chatService.saveUser(newUser);
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body("User created successfully");
+                    .body("{\"message\": \"User created successfully\"}");
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
-                    .body("Error: JSON");
-        } catch (Exception e) {
+                    .body("{\"message\": \"Error: JSON\"}");
+                } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error: " + e.getMessage());
+                    .body("{\"message\": \"Error: " + e.getMessage() + "\"}");
         }
     }
 

@@ -1,7 +1,9 @@
 package com.projet.certifback.controller.user.dto;
 import java.util.Objects;
 
+
 public class UserPostDTO {
+
     private String nom;
     private String prenom;
     private String email;
@@ -17,6 +19,8 @@ public class UserPostDTO {
         this.email = email;
         this.pseudo = pseudo;
     }
+
+
 
     public String getNom() {
         return this.nom;

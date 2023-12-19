@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.projet.certifback.dao.entity.Message;
 
 public class ChannelDTO {
+    private Long id;
     private String name;
     private String description;
     private List<Message> messages;
@@ -18,6 +19,15 @@ public class ChannelDTO {
         this.name = name;
         this.description = description;
         this.messages = messages;
+    }
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

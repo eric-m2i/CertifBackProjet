@@ -2,28 +2,38 @@ package com.projet.certifback.controller.message.dto;
 
 import java.time.LocalDateTime;
 
-import com.projet.certifback.controller.channel.dto.ChannelPostDTO;
-import com.projet.certifback.controller.user.dto.UserPostDTO;
+import com.projet.certifback.controller.channel.dto.ChannelDTO;
+import com.projet.certifback.controller.user.dto.UserDTO;
 
 import java.util.Objects;
 
 
 public class MessageDTO {
 
+    private Long id;
     private String content;
     private LocalDateTime timestamp;
-    private ChannelPostDTO channel;
-    private UserPostDTO user;
+    private ChannelDTO channel;
+    private UserDTO user;
 
 
     public MessageDTO() {
     }
 
-    public MessageDTO(String content, LocalDateTime timestamp, ChannelPostDTO channel, UserPostDTO user) {
+    public MessageDTO(String content, LocalDateTime timestamp, ChannelDTO channel, UserDTO user) {
         this.content = content;
         this.timestamp = timestamp;
         this.channel = channel;
         this.user = user;
+    }
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContent() {
@@ -42,19 +52,19 @@ public class MessageDTO {
         this.timestamp = timestamp;
     }
 
-    public ChannelPostDTO getChannel() {
+    public ChannelDTO getChannel() {
         return this.channel;
     }
 
-    public void setChannel(ChannelPostDTO channel) {
+    public void setChannel(ChannelDTO channel) {
         this.channel = channel;
     }
 
-    public UserPostDTO getUser() {
+    public UserDTO getUser() {
         return this.user;
     }
 
-    public void setUser(UserPostDTO user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
@@ -68,12 +78,12 @@ public class MessageDTO {
         return this;
     }
 
-    public MessageDTO channel(ChannelPostDTO channel) {
+    public MessageDTO channel(ChannelDTO channel) {
         setChannel(channel);
         return this;
     }
 
-    public MessageDTO user(UserPostDTO user) {
+    public MessageDTO user(UserDTO user) {
         setUser(user);
         return this;
     }

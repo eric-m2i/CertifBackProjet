@@ -1,7 +1,7 @@
 package com.projet.certifback.controller.message.dto;
 
-import com.projet.certifback.controller.channel.dto.ChannelMapper;
-import com.projet.certifback.controller.user.dto.UserMapper;
+import com.projet.certifback.controller.channel.dto.ChannelDTO;
+import com.projet.certifback.controller.user.dto.UserDTO;
 import com.projet.certifback.dao.entity.Message;
 
 
@@ -9,11 +9,21 @@ public class MessageMapper {
 
     public static MessageDTO convertFromEntityToDto(Message entity) {
         MessageDTO dto = new MessageDTO();
-        entity.getUser().setMessages(null);
-        entity.getChannel().setMessages(null);
-        dto.setUser(UserMapper.convertFromEntityToPostDto(entity.getUser())); // setUser est un UserPostTDO
-        dto.setChannel(ChannelMapper.convertFromEntityToPostDto(entity.getChannel())); // setChannel est un
-                                                                                       // ChannelPostTDO
+        dto.setId(entity.getId());
+        // entity.getUser().setMessages(null);
+        // entity.getChannel().setMessages(null);
+
+        dto.setUser(new UserDTO());
+        dto.getUser().setId(entity.getUser().getId());
+        dto.getUser().setNom(entity.getUser().getNom());
+        dto.getUser().setPrenom(entity.getUser().getPrenom());
+        dto.getUser().setEmail(entity.getUser().getEmail());
+        dto.getUser().setPseudo(entity.getUser().getPseudo());
+
+        dto.setChannel(new ChannelDTO());
+        dto.getChannel().setId(entity.getChannel().getId());
+        dto.getChannel().setName(entity.getChannel().getName());
+        dto.getChannel().setDescription(entity.getChannel().getDescription());                                                                           
 
         dto.setContent(entity.getContent());
         dto.setTimestamp(entity.getTimestamp());

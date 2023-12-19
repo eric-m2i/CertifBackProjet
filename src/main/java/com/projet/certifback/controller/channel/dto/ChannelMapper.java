@@ -16,6 +16,7 @@ public class ChannelMapper {
 
     public static ChannelDTO convertFromEntityToDto(Channel entity) {
         ChannelDTO dto = new ChannelDTO();
+        dto.setId(entity.getId());
         dto.setDescription(entity.getDescription());
         dto.setName(entity.getName());
 
