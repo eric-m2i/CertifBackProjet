@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projet.certifback.controller.channel.dto.ChannelDTO;
+import com.projet.certifback.controller.channel.dto.ChannelMapper;
+import com.projet.certifback.controller.channel.dto.ChannelPostDTO;
 import com.projet.certifback.dao.entity.Channel;
 import com.projet.certifback.dao.entity.Message;
 import com.projet.certifback.dao.entity.User;
@@ -15,12 +18,13 @@ import com.projet.certifback.dao.repository.UserRepository;
 
 @Service
 public class ChatService {
+
     public static final String CANAL_GENERAL = "GENERAL";
+
     @Autowired
     private ChannelRepository channelRepository;
 
     @Autowired
-
     private MessageRepository messageRepository;
 
     @Autowired
@@ -125,4 +129,25 @@ public class ChatService {
         }
         return null;
     }
+
+    //////////////////////////////// MAPPER //////////////////////////////////
+
+    // @Autowired
+    // private ChannelMapper channelMapper;
+
+    // public ChannelDTO convertChannelToDTO(Channel channel) {
+    //     return channelMapper.convertChannelToDTO(channel);
+    // }
+
+    // public ChannelPostDTO convertChannelToPostDTO(Channel channel) {
+    //     return channelMapper.convertChannelToPostDTO(channel);
+    // }
+
+    // public Channel convertDTOToChannel(ChannelPostDTO channelPostDTO) {
+    //     return channelMapper.convertDTOToChannel(channelPostDTO);
+    // }
+
+    // public List<ChannelDTO> convertListChannelToDTO(List<Channel> channels) {
+    //     return channelMapper.convertListChannelToDTO(channels);
+    // }
 }

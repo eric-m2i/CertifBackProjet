@@ -62,12 +62,12 @@ Bienvenue dans le projet de chat en ligne basé sur Spring. Cette application de
 
 ## Technologies Utilisées
 
+- **Java 17 :** Adopté comme version principale du langage de programmation, Java 17 offre des fonctionnalités modernes et des améliorations de performance, contribuant à la robustesse et à la sécurité de l'application.
+- **Maven :** Utilisé comme système de gestion de projets, Maven simplifie la configuration et la gestion des dépendances, garantissant une structure de projet cohérente.
 - **Spring Boot :** Utilisé comme framework principal pour le backend, offrant une gestion simplifiée du développement.
 - **Spring Data JPA :** Utilisé pour la gestion de la persistance des données, facilitant les opérations avec la base de données.
-- **Maven :** Utilisé comme système de gestion de projets, Maven simplifie la configuration et la gestion des dépendances, garantissant une structure de projet cohérente.
-- **Java 17 :** Adopté comme version principale du langage de programmation, Java 17 offre des fonctionnalités modernes et des améliorations de performance, contribuant à la robustesse et à la sécurité de l'application.
 - **Spring Service, Repository :** Utilisés pour la mise en œuvre des couches de services métier et d'accès aux données, ces composants de Spring facilitent la séparation des préoccupations et favorisent la maintenabilité du code.
-- **Angular 17 :** Moteur de template utilisé pour la génération des pages HTML, assurant une expérience utilisateur dynamique.
+- **Angular 17 :** Framework intégrant un moteur de templates, permettant la création dynamique de pages HTML et assurant une expérience utilisateur interactive.
 - **PostgreSQL :** Base de données relationnelle intégrée pour le développement, assurant la stabilité et la performance.
 
 ## Structure du Projet

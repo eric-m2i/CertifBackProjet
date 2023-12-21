@@ -24,7 +24,7 @@ public class MessageRestController {
         List<Message> entities = chatService.getMessagesByChannel(channelId);
         List<MessageDTO> dtos = new ArrayList<>();
         for (Message entity : entities)
-            dtos.add(MessageMapper.convertFromEntityToDto(entity));
+            dtos.add(MessageMapper.INSTANCE.convertFromEntityToDto(entity));
 
         return ResponseEntity.ok().body(dtos);
     }
@@ -37,7 +37,7 @@ public class MessageRestController {
             if (channelId.equals(messagePostDTO.getChannel().getId()) &&
                     userId.equals(messagePostDTO.getUser().getId())) {
 
-                Message message = MessageMapper.convertFromDtoToEntity(messagePostDTO);
+                Message message = MessageMapper.INSTANCE.convertFromDtoToEntity(messagePostDTO);
                 chatService.addMessage(channelId, userId, message);
 
                 return ResponseEntity

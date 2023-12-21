@@ -1,40 +1,38 @@
 package com.projet.certifback.controller.channel.dto;
 
-import java.util.ArrayList;
+import com.projet.certifback.dao.entity.Channel;
+
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
+
 import java.util.List;
 
-import com.projet.certifback.dao.entity.Channel;
-import com.projet.certifback.dao.entity.Message;
+@Mapper(componentModel = "spring")
+public interface ChannelMapper {
 
-public class ChannelMapper {
-        public static ChannelPostDTO convertFromEntityToPostDto(Channel entity) {
-        ChannelPostDTO postDTO = new ChannelPostDTO();
-        postDTO.setDescription(entity.getDescription());
-        postDTO.setName(entity.getName());
-        return postDTO;
+    ChannelMapper INSTANCE = Mappers.getMapper(ChannelMapper.class);
+
+    @Mapping(target = "messages", source = "entity.messages")
+    @AfterMapping
+    default void ignoreUserAndChannelInMessages(@MappingTarget ChannelDTO channelDTO) {
+        channelDTO.getMessages().forEach(
+                messageDTO -> {
+                    messageDTO.setChannel(null);
+                    messageDTO.setUser(null);
+                });
     }
 
-    public static ChannelDTO convertFromEntityToDto(Channel entity) {
-        ChannelDTO dto = new ChannelDTO();
-        dto.setId(entity.getId());
-        dto.setDescription(entity.getDescription());
-        dto.setName(entity.getName());
+    ChannelDTO convertChannelToDTO(Channel entity);
 
-        List<Message> messages = new ArrayList<>();
-        for (Message message : entity.getMessages()) {
-            message.setChannel(null);
-            message.getUser().setMessages(null);
-            messages.add(message);
-        }
-        dto.setMessages(messages);
+    ChannelPostDTO convertChannelToPostDTO(Channel entity);
 
-        return dto;
-    }
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "messages", ignore = true)
+    Channel convertDTOToChannel(ChannelPostDTO dto);
 
-    public static Channel convertFromDtoToEntity(ChannelPostDTO dto) {
-        Channel entity = new Channel();
-        entity.setDescription(dto.getDescription());
-        entity.setName(dto.getName());
-        return entity;
-    }
+    // List<ChannelDTO> convertListChannelToDTO(List<Channel> entities);
+
 }

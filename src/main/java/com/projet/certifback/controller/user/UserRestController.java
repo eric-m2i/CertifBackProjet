@@ -31,7 +31,7 @@ public class UserRestController {
         List<User> entities = chatService.getAllUsers();
         List<UserDTO> dtos = new ArrayList<>();
         for (User entity : entities)
-            dtos.add(UserMapper.convertFromEntityToDto(entity));
+            dtos.add(UserMapper.INSTANCE.convertFromEntityToDto(entity));
 
         return ResponseEntity.ok().body(dtos);
     }
@@ -44,14 +44,14 @@ public class UserRestController {
                     .status(HttpStatus.NOT_FOUND)
                     .body("{\"message\": \"User not found\"}");
         }
-        UserDTO dto = UserMapper.convertFromEntityToDto(entity);
+        UserDTO dto = UserMapper.INSTANCE.convertFromEntityToDto(entity);
         return ResponseEntity
                 .ok(dto);
     }
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody UserPostDTO UserPostDTO) {
-        User newUser = UserMapper.convertFromDtoToEntity(UserPostDTO);
+        User newUser = UserMapper.INSTANCE.convertFromDtoToEntity(UserPostDTO);
         try {
             chatService.saveUser(newUser);
             return ResponseEntity

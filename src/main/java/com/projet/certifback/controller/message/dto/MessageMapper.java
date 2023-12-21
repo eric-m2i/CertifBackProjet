@@ -1,51 +1,34 @@
 package com.projet.certifback.controller.message.dto;
 
-import com.projet.certifback.controller.channel.dto.ChannelDTO;
-import com.projet.certifback.controller.user.dto.UserDTO;
 import com.projet.certifback.dao.entity.Message;
 
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
-public class MessageMapper {
+@Mapper(componentModel = "spring")
+public interface MessageMapper {
 
-    public static MessageDTO convertFromEntityToDto(Message entity) {
-        MessageDTO dto = new MessageDTO();
-        dto.setId(entity.getId());
-        // entity.getUser().setMessages(null);
-        // entity.getChannel().setMessages(null);
+    MessageMapper INSTANCE = Mappers.getMapper(MessageMapper.class);
 
-        dto.setUser(new UserDTO());
-        dto.getUser().setId(entity.getUser().getId());
-        dto.getUser().setNom(entity.getUser().getNom());
-        dto.getUser().setPrenom(entity.getUser().getPrenom());
-        dto.getUser().setEmail(entity.getUser().getEmail());
-        dto.getUser().setPseudo(entity.getUser().getPseudo());
+    @Mapping(target = "channel", source = "entity.channel")
+    @Mapping(target = "user", source = "entity.user")
+    @AfterMapping
+    default void ignoreUserAndChannel(@MappingTarget MessageDTO messageDTO) {
+        if (messageDTO.getChannel() != null) {
+            messageDTO.getChannel().setMessages(null);
+        }
 
-        dto.setChannel(new ChannelDTO());
-        dto.getChannel().setId(entity.getChannel().getId());
-        dto.getChannel().setName(entity.getChannel().getName());
-        dto.getChannel().setDescription(entity.getChannel().getDescription());                                                                           
-
-        dto.setContent(entity.getContent());
-        dto.setTimestamp(entity.getTimestamp());
-        return dto;
+        if (messageDTO.getUser() != null) {
+            messageDTO.getUser().setMessages(null);
+        }
     }
 
-    public static Message convertFromDtoToEntity(MessagePostDTO dto) {
-        Message entity = new Message();
-        entity.setChannel(dto.getChannel());
-        entity.setContent(dto.getContent());
-        entity.setTimestamp(dto.getTimestamp());
-        entity.setUser(dto.getUser());
+    MessageDTO convertFromEntityToDto(Message entity);
 
-        return entity;
-    }
-
-    // @DeleteMapping("/{messageId}")
-    // public ResponseEntity<String> deleteMessage(@PathParam("messageId") Long messageId) {
-    //     if (chatService.deleteMessage(messageId)) {
-    //         return ResponseEntity.ok("Client deleted successfully");
-    //     } else
-    //         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client not found");
-    // }
+    @Mapping(target = "id", ignore = true)
+    Message convertFromDtoToEntity(MessagePostDTO dto);
 
 }

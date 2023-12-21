@@ -34,7 +34,7 @@ public class ChannelRestController {
         List<Channel> entities = chatService.getAllChannels();
         List<ChannelDTO> dtos = new ArrayList<>();
         for (Channel entity : entities)
-            dtos.add(ChannelMapper.convertFromEntityToDto(entity));
+            dtos.add(ChannelMapper.INSTANCE.convertChannelToDTO(entity));
 
         return ResponseEntity.ok().body(dtos);
     }
@@ -47,13 +47,13 @@ public class ChannelRestController {
                     .status(HttpStatus.NOT_FOUND)
                     .body("{\"message\": \"Channel not found\"}");
         }
-        ChannelDTO dto = ChannelMapper.convertFromEntityToDto(entity);
+        ChannelDTO dto = ChannelMapper.INSTANCE.convertChannelToDTO(entity);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
     public ResponseEntity<String> createChannel(@RequestBody ChannelPostDTO ChannelPostDTO) {
-        Channel newChannel = ChannelMapper.convertFromDtoToEntity(ChannelPostDTO);
+        Channel newChannel = ChannelMapper.INSTANCE.convertDTOToChannel(ChannelPostDTO);
         try {
             Channel newChannelTested = chatService.saveChannel(newChannel);
             if (newChannelTested != null) {
@@ -78,7 +78,7 @@ public class ChannelRestController {
     @PutMapping("{channelId}")
     public ResponseEntity<String> putChannel(@RequestBody ChannelPostDTO channelPutDTO,
             @PathVariable("channelId") Long channelId) {
-        Channel channel = ChannelMapper.convertFromDtoToEntity(channelPutDTO);
+        Channel channel = ChannelMapper.INSTANCE.convertDTOToChannel(channelPutDTO);
         Channel existingChanel = chatService.updateChannel(channel, channelId);
         if (existingChanel != null) {
             try {
@@ -103,7 +103,7 @@ public class ChannelRestController {
     @PatchMapping("{channelId}")
     public ResponseEntity<String> patchChannel(@PathVariable("channelId") Long id,
             @RequestBody ChannelPostDTO ChannelPatchDTO) {
-        Channel Channel = ChannelMapper.convertFromDtoToEntity(ChannelPatchDTO);
+        Channel Channel = ChannelMapper.INSTANCE.convertDTOToChannel(ChannelPatchDTO);
         Channel existingChannel = chatService.patchChannel(Channel, id);
         if (existingChannel == null) {
             return ResponseEntity
